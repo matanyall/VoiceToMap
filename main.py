@@ -1,5 +1,3 @@
-# import MapHTMLGen
-# import VoiceToToken
 import re
 import subprocess
 import speech_recognition as sr
