@@ -1,11 +1,14 @@
 # import MapHTMLGen
 # import VoiceToToken
 import re
+import subprocess
 import speech_recognition as sr
 from FindAddressMap import make_map
 import os
+from subprocess import DEVNULL, STDOUT
 
 os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/matanya/Documents/GitHub/flight-knowledge-engine-15d3388253f2.json"')
+subprocess.Popen(["/usr/bin/python3", "-m", "http.server"], shell=False, stdout=DEVNULL, stderr=STDOUT)
 # os.system('python3 -m http.server')
 # Regex for getting the address out of speech string
 street_address = re.compile('\d{1,4} [\w\s]{1,20}(?:street|st|avenue|ave|road|rd|highway|hwy|square|sq|trail|trl|drive|dr|court|ct|park|parkway|pkwy|circle|cir|boulevard|blvd)\W?(?=\s|$)', re.IGNORECASE)
