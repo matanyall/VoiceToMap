@@ -5,11 +5,12 @@ from FindAddressMap import make_map
 import os
 from subprocess import DEVNULL, STDOUT
 
-os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/matanya/Documents/GitHub/flight-knowledge-engine-15d3388253f2.json"')
+# os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/matanya/Documents/GitHub/flight-knowledge-engine-15d3388253f2.json"')
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/matanya/Documents/GitHub/flight-knowledge-engine-15d3388253f2.json"
 subprocess.Popen(["/usr/bin/python3", "-m", "http.server"], shell=False, stdout=DEVNULL, stderr=STDOUT)
 # os.system('python3 -m http.server')
 # Regex for getting the address out of speech string
-street_address = re.compile('\d{1,4} [\w\s]{1,20}(?:street|st|avenue|ave|road|rd|highway|hwy|square|sq|trail|trl|drive|dr|court|ct|park|parkway|pkwy|circle|cir|boulevard|blvd)\W?(?=\s|$)', re.IGNORECASE)
+street_address = re.compile('\d{1,5} [\w\s]{1,20}(?:street|st|avenue|ave|road|rd|highway|hwy|square|sq|trail|trl|drive|dr|court|ct|park|parkway|pkwy|circle|cir|boulevard|blvd)\W?(?=\s|$)', re.IGNORECASE)
 # Initializers for SpeechRecognition
 r = sr.Recognizer()
 mic = sr.Microphone()
@@ -18,9 +19,9 @@ result = ""
 # main loop
 with mic as source:
     # Microphone is set as source for speech-to-text engine, and slight calibration for ambient noise
-    print("quiet for calibration")
+    print("quiet for calibration:")
     r.adjust_for_ambient_noise(source) 
-    print("Ready")
+    print("Ready:")
     # loop that runs 
     while True:
         audio = r.listen(source)
